@@ -40,7 +40,7 @@ export class TaskEffects {
         this.action$.pipe(
             ofType(TaskActions.UPDATE_Task),
             exhaustMap((action) => {
-                return this.service.Updatetask(action).pipe(
+                return this.service.UpdateTask(action).pipe(
                     map((data) => {
                         return TaskActions.updateTasksuccess({ Taskinput: data as Task })
                     }),
