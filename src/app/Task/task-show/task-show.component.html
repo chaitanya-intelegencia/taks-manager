@@ -1,0 +1,64 @@
+<div class="bg-white p-6 rounded shadow-md">
+    <h2 class="text-2xl mb-4">Show Tasks</h2>
+    <!-- Your logic to display tasks will go here -->
+    <p>List of tasks will be shown here.</p>
+        <div class="task-list">
+            <h2>Task List</h2>
+            <div *ngFor="let task of tasks">
+              <mat-card>
+                <mat-card-header>
+                  <h1 (click)="toggleDetails(task.id)">{{ task.title }}</h1>
+                  <div style="text-align: right; width: 100%;">
+                    <button (click)="enterEditMode(task)" mat-raised-button color="primary">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button (click)="deleteTask(task.id)" mat-raised-button color="accent">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </mat-card-header>
+                <mat-card-content *ngIf="showDetails[task.id]">
+                  <div *ngIf="editMode[task.id]">
+                    <!-- Editable form -->
+                    <mat-form-field appearance="fill">
+                      <mat-label>Title</mat-label>
+                      <input matInput [(ngModel)]="editedTask!.title">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Description</mat-label>
+                      <textarea matInput [(ngModel)]="editedTask!.description"></textarea>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Due Date</mat-label>
+                      <input matInput [(ngModel)]="editedTask!.dueDate" type="date">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Priority</mat-label>
+                      <input matInput [(ngModel)]="editedTask!.priority">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Status</mat-label>
+                      <input matInput [(ngModel)]="editedTask!.status">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Assignee</mat-label>
+                      <input matInput [(ngModel)]="editedTask!.assignee">
+                    </mat-form-field>
+                    <button (click)="saveTask(task.id)" mat-raised-button color="primary">Save</button>
+                    <button (click)="cancelEdit(task.id)" mat-raised-button color="warn">Cancel</button>
+                  </div>
+                  <div *ngIf="!editMode[task.id]">
+                    <!-- Display details -->
+                    <p>{{ task.description }}</p>
+                    <p>Due Date: {{ task.dueDate | date:'medium' }}</p>
+                    <p>Priority: {{ task.priority }}</p>
+                    <p>Status: {{ task.status }}</p>
+                    <p>Assignee: {{ task.assignee }}</p>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>          
+                     
+          </div>          
+  </div>
+  

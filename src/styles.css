@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mat-tab-nav-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+  
+  .mat-tab-link {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .mat-tab-link.active {
+    border-bottom: 2px solid white;
+  }

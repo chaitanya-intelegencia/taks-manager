@@ -1,0 +1,58 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Task 1",
+      "description": "Description for Task 1",
+      "dueDate": "2024-06-20T00:00:00Z",
+      "priority": "High",
+      "status": "Not Started",
+      "assignee": "John Doe",
+      "category": "Work",
+      "subtasks": [],
+      "attachments": [],
+      "comments": [],
+      "createdDate": "2024-06-14T00:00:00Z",
+      "updatedDate": "2024-06-14T00:00:00Z",
+      "tags": ["urgent"],
+      "estimatedTime": 4,
+      "actualTime": 0
+    },
+    {
+      "id": 2,
+      "title": "Task 2",
+      "description": "Description for Task 2",
+      "dueDate": "2024-06-22T00:00:00Z",
+      "priority": "Medium",
+      "status": "In Progress",
+      "assignee": "Jane Doe",
+      "category": "Personal",
+      "subtasks": [],
+      "attachments": [],
+      "comments": [],
+      "createdDate": "2024-06-14T00:00:00Z",
+      "updatedDate": "2024-06-14T00:00:00Z",
+      "tags": ["important"],
+      "estimatedTime": 2,
+      "actualTime": 1
+    },
+    {
+      "id": 3,
+      "title": "Task 3",
+      "description": "Description for Task 4",
+      "dueDate": "2024-06-22T00:00:00Z",
+      "priority": "Medium",
+      "status": "In Progress",
+      "assignee": "Jane Doe",
+      "category": "Personal",
+      "subtasks": [],
+      "attachments": [],
+      "comments": [],
+      "createdDate": "2024-06-14T00:00:00Z",
+      "updatedDate": "2024-06-14T00:00:00Z",
+      "tags": ["important"],
+      "estimatedTime": 2,
+      "actualTime": 1
+    }
+  ]
+}
