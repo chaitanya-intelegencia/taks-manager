@@ -1,5 +1,10 @@
 # To Start the Backend Enter Below Command
-json-server --watch .\tasks.json
+step 1)cd scora\taks-manager\src\assets> 
+step 2)  json-server --watch ./tasks.json --port 3000
+
+# To Start the Frontend Enter Below Command
+Step 1) Npm run start
+
 
 # TaksManager
 
