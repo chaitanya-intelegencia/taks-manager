@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-task-show',
@@ -33,7 +34,7 @@ export class TaskShowComponent implements OnInit {
   editMode: { [key: number]: boolean } = {};
   editedTask: Task | null = null;
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService,private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.taskService.GetAlltasks().subscribe((data: Task[]) => {
@@ -51,19 +52,34 @@ export class TaskShowComponent implements OnInit {
 
   enterEditMode(task: Task): void {
     this.editMode[task.id] = true;
+    this.showDetails[task.id] = !this.showDetails[task.id];
     this.editedTask = { ...task };
   }
 
   saveTask(taskId: number): void {
     if (this.editedTask) {
-      this.taskService.UpdateTask(this.editedTask).subscribe((updatedTask: Task) => {
-        const index = this.tasks.findIndex(task => task.id === updatedTask.id);
-        if (index !== -1) {
-          this.tasks[index] = updatedTask;
-          this.editMode[taskId] = false;
-          this.editedTask = null;
+      this.taskService.UpdateTask(this.editedTask).subscribe(
+        (updatedTask) => {
+          const index = this.tasks.findIndex(task => task.id === updatedTask.id);
+          if (index !== -1) {
+            this.tasks[index] = updatedTask;
+            this.editMode[taskId] = false;
+            this.editedTask = null;
+            this.snackBar.open('Task updated successfully', 'Close', {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+            });
+          }
+        },
+        (error) => {
+          this.snackBar.open('Failed to update task', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+          });
         }
-      });
+      );
     }
   }
 

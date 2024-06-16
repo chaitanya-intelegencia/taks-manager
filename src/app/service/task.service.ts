@@ -15,16 +15,14 @@ export class TaskService {
   GetAlltasks():Observable<Task[]>{
     return this.http.get<Task[]>(this.tasksUrl)
   }
-  CreateTask(taskinput:Task){
-    return this.http.post(this.tasksUrl,taskinput).pipe(
-      tap(()=>{
-        this.http.get<Task>(`${this.tasksUrl}/?_limit=1&_sort=id`);
-      })
-    )
+  CreateTask(taskinput: Task): Observable<Task> {
+    return this.http.post<Task>(this.tasksUrl, taskinput).pipe(
+      tap((newTask: Task) => console.log(`Created task with id=${newTask.id}`))
+    );
   }
-
   UpdateTask(task: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.tasksUrl}/${task.id}`, task);
+    const url = `${this.tasksUrl}/${task.id}`;
+    return this.http.put<Task>(url, task);
   }
   
   Deletetask(taskid:number){
