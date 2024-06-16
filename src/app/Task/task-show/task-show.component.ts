@@ -46,17 +46,17 @@ export class TaskShowComponent implements OnInit {
     });
   }
 
-  toggleDetails(taskId: number): void {
+  public toggleDetails(taskId: number): void {
     this.showDetails[taskId] = !this.showDetails[taskId];
   }
 
-  enterEditMode(task: Task): void {
+  public enterEditMode(task: Task): void {
     this.editMode[task.id] = true;
     this.showDetails[task.id] = !this.showDetails[task.id];
     this.editedTask = { ...task };
   }
 
-  saveTask(taskId: number): void {
+  public saveTask(taskId: number): void {
     if (this.editedTask) {
       this.taskService.UpdateTask(this.editedTask).subscribe(
         (updatedTask) => {
@@ -83,14 +83,46 @@ export class TaskShowComponent implements OnInit {
     }
   }
 
-  cancelEdit(taskId: number): void {
+  public markAsCompleted(taskId: number): void {
+    const task = this.tasks.find(t => t.id === taskId);
+    if (task) {
+      task.status = 'Completed';
+      this.taskService.UpdateTask(task).subscribe(
+        (updatedTask) => {
+          const index = this.tasks.findIndex(t => t.id === updatedTask.id);
+          if (index !== -1) {
+            this.tasks[index] = updatedTask;
+            this.snackBar.open('Task marked as completed', 'Close', {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+            });
+          }
+        },
+        (error) => {
+          this.snackBar.open('Failed to mark task as completed', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+          });
+        }
+      );
+    }
+  }
+
+  public cancelEdit(taskId: number): void {
     this.editMode[taskId] = false;
     this.editedTask = null;
   }
 
-  deleteTask(taskId: number): void {
+  public deleteTask(taskId: number): void {
     this.taskService.Deletetask(taskId).subscribe(() => {
       this.tasks = this.tasks.filter(task => task.id !== taskId);
+      this.snackBar.open('Task deleted', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
     });
   }
 }
